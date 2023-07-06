@@ -88,8 +88,8 @@ class TFT24T():
         return not self._gpio.input(self._pen)
 
     def readValue(self, channel):
-#        self._spi.open(0, self._ce_tch)
-	self._spi.open(1,self._ce_tch)
+        self._spi.open(0, self._ce_tch)
+        # self._spi.open(1,self._ce_tch)
         self._spi.max_speed_hz=self._spi_speed_tch
 
         responseData = self._spi.xfer([channel , 0, 0])
@@ -276,7 +276,7 @@ class TFT24T():
         """
 
         if type(color) != type((0,0,0)):
-            print "clear() function colours must be in (255,255,0) form"
+            print("clear() function colours must be in (255,255,0) form")
             exit()
         width, height = Buffer.size
         Buffer.putdata([color]*(width*height))
@@ -286,9 +286,9 @@ class TFT24T():
         """Return a PIL ImageDraw instance for drawing on the image buffer."""
         d = ImageDraw.Draw(Buffer)
         # Add custom methods to the draw object:
-        d.textrotated = MethodType(_textrotated, d, ImageDraw.Draw)
-        d.pasteimage = MethodType(_pasteimage, d, ImageDraw.Draw)
-        d.textwrapped = MethodType(_textwrapped, d, ImageDraw.Draw)
+        d.textrotated = MethodType(_textrotated, d)
+        d.pasteimage = MethodType(_pasteimage, d)
+        d.textwrapped = MethodType(_textwrapped, d)
         return d
 
     def load_wallpaper(self, filename):

@@ -27,7 +27,7 @@ from time import sleep
 #For LCD TFT SCREEN:
 DC = 24
 RST = 25
-LED = 15
+LED = 18
 
 #For PEN TOUCH:
 #   (nothing)
@@ -42,6 +42,7 @@ TFT = TFT24T(spidev.SpiDev(), GPIO, landscape=False)
 TFT.initLCD(DC, RST, LED)
 # If rst is omitted then tie rst pin to +3.3V
 # If led is omitted then tie led pin to +3.3V
+TFT.backlite(True)
 
 # Get the PIL Draw object to start drawing on the display buffer.
 draw = TFT.draw()
@@ -60,7 +61,7 @@ while 1:
     print('Drawing image')
     TFT.display(image)
     sleep(3)
-    print "Test a long para of text, auto-wrapped into screen lines."
+    print("Test a long para of text, auto-wrapped into screen lines.")
     TFT.clear()
     font=ImageFont.truetype('FreeSans.ttf', 18)
     text1 = \
@@ -73,7 +74,7 @@ while 1:
     sleep(1)
 
     TFT.clear((90,90,255))
-    print "show a font in giant letters"
+    print("show a font in giant letters")
     font = ImageFont.truetype('FreeSerifItalic.ttf', 40)
     draw.textrotated((100,10), 'BehindTheSciences',90 ,font=font, fill="RED")   # signature !
 
